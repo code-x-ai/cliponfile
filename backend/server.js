@@ -47,14 +47,14 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date() });
 });
 
-// Production: serve frontend static files
-if (process.env.NODE_ENV === 'production') {
-  const staticPath = join(__dirname, 'public');
-  app.use(express.static(staticPath));
-  app.get('*', (req, res) => {
-    res.sendFile(join(staticPath, 'index.html'));
-  });
-}
+// // Production: serve frontend static files
+// if (process.env.NODE_ENV === 'production') {
+//   const staticPath = join(__dirname, 'public');
+//   app.use(express.static(staticPath));
+//   app.get('*', (req, res) => {
+//     res.sendFile(join(staticPath, 'index.html'));
+//   });
+// }
 
 // MongoDB connection
 mongoose
