@@ -20,6 +20,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+// Add trust proxy to fix rate limiter warning
+app.set('trust proxy', 1);
+
 const PORT = process.env.PORT || 5000;
 
 // Rate limiting
@@ -47,14 +50,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date() });
 });
 
-// // Production: serve frontend static files
-// if (process.env.NODE_ENV === 'production') {
-//   const staticPath = join(__dirname, 'public');
-//   app.use(express.static(staticPath));
-//   app.get('*', (req, res) => {
-//     res.sendFile(join(staticPath, 'index.html'));
-//   });
-// }
+// ⚠️ REMOVE the entire static serving block (do not serve frontend from backend)
 
 // MongoDB connection
 mongoose
